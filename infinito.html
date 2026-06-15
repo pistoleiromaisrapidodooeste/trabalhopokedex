@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pokédle Infinito</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="base.css" />
+  <link rel="stylesheet" href="pokédle.css" />
+</head>
+<body>
+
+  <header class="header" role="banner">
+    <div class="header__inner">
+      <div class="header__logo" aria-label="Pokédex Logo">
+        <span class="header__logo-icon" aria-hidden="true">◎</span>
+        <h1 class="header__title">Pokédex</h1>
+      </div>
+      <p class="header__subtitle">Jogue quantas vezes quiser!</p>
+    </div>
+    <nav class="header__nav" role="navigation" aria-label="Navegação principal">
+      <a class="header__nav-btn" href="index.html">
+        <span class="header__nav-icon">◎</span><span>Pokédex</span>
+      </a>
+      <a class="header__nav-btn header__nav-btn--active" href="diario.html" aria-current="page">
+        <span class="header__nav-icon">🎮</span><span>Pokédle</span>
+      </a>
+    </nav>
+    <div class="header__decoration" aria-hidden="true"><div class="header__ball"></div></div>
+  </header>
+
+  <nav class="subnav" role="tablist" aria-label="Modos de jogo">
+    <a class="subnav__tab"                     href="diario.html"              >📅 Diário</a>
+    <a class="subnav__tab subnav__tab--active" href="infinito.html" aria-current="page">♾ Infinito</a>
+    <a class="subnav__tab"                     href="silhueta.html"            >👤 Silhueta</a>
+  </nav>
+
+  <div class="dle-panel">
+
+    <div class="dle-header">
+      <h2 class="dle-title">Modo Infinito</h2>
+      <p class="dle-subtitle">Novo Pokémon a cada rodada — jogue quantas vezes quiser!</p>
+      <div class="streak-display">
+        <div class="streak-item streak-item--fire">
+          <span class="streak-value" id="inf-wins">0</span>
+          <span class="streak-label">🏆 Vitórias</span>
+        </div>
+        <div class="streak-item">
+          <span class="streak-value" id="inf-played">0</span>
+          <span class="streak-label">🎮 Jogados</span>
+        </div>
+      </div>
+      <button class="dle-how-btn" data-how="how-guessing">❓ Como jogar</button>
+    </div>
+
+    <div class="dle-search-wrap">
+      <div class="dle-autocomplete">
+        <input class="dle-input" type="text" id="inf-input"
+          placeholder="Digite o nome de um Pokémon…"
+          autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" />
+        <ul class="dle-suggestions" id="inf-suggestions" role="listbox" hidden></ul>
+      </div>
+      <button class="dle-guess-btn" id="inf-guess-btn" disabled>Chutar</button>
+    </div>
+
+    <div class="dle-status" id="inf-status" hidden></div>
+
+    <div class="dle-board-wrap">
+      <div class="dle-cols-header" id="inf-cols-header" hidden>
+        <span class="dle-col-label">Pokémon</span>
+        <span class="dle-col-label">Tipo 1</span>
+        <span class="dle-col-label">Tipo 2</span>
+        <span class="dle-col-label">Geração</span>
+        <span class="dle-col-label">Cor</span>
+        <span class="dle-col-label">Altura</span>
+        <span class="dle-col-label">Peso</span>
+        <span class="dle-col-label">Lendário</span>
+      </div>
+      <div class="dle-board" id="inf-board" aria-live="polite"></div>
+    </div>
+
+    <div class="dle-actions">
+      <button class="dle-new-btn" id="inf-new-btn">🔄 Próximo Pokémon</button>
+    </div>
+
+  </div>
+
+  
+  <div class="dle-how" id="how-guessing" hidden>
+    <div class="dle-how__backdrop" data-close="how-guessing"></div>
+    <div class="dle-how__panel" role="dialog" aria-modal="true">
+      <button class="modal__close" data-close="how-guessing">✕</button>
+      <h3 class="dle-how__title">Como jogar</h3>
+      <p class="dle-how__text">Adivinhe o Pokémon pelos seus atributos. A cada chute você recebe dicas coloridas:</p>
+      <ul class="dle-how__list">
+        <li><span class="dle-cell dle-cell--correct">✓</span> <strong>Verde</strong> — atributo correto</li>
+        <li><span class="dle-cell dle-cell--partial">~</span> <strong>Amarelo</strong> — parcialmente correto</li>
+        <li><span class="dle-cell dle-cell--wrong">✕</span>  <strong>Vermelho</strong> — atributo incorreto</li>
+        <li><span class="dle-cell dle-cell--higher">↑</span> <strong>Azul ↑</strong> — o valor real é maior</li>
+        <li><span class="dle-cell dle-cell--lower">↓</span>  <strong>Azul ↓</strong> — o valor real é menor</li>
+      </ul>
+      <p class="dle-how__text">Você tem <strong>8 tentativas</strong>. Boa sorte, treinador!</p>
+    </div>
+  </div>
+
+  <footer class="footer" role="contentinfo">
+    <p class="footer__text">
+      Dados fornecidos pela <a href="https://pokeapi.co" target="_blank" rel="noopener noreferrer" class="footer__link">PokéAPI</a>
+      &nbsp;·&nbsp; Pokémon e seus nomes são marcas registradas da Nintendo.
+    </p>
+  </footer>
+
+  
+  <script src="dle.js"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+/* ============================================================
+   diario.css — Estilos exclusivos de diario.html
+   Depende de: base.css + pokédle.css
+   ============================================================ */
+
+/* ── BANNER "JÁ JOGOU HOJE" ─────────────────────────────────── */
+.daily-played-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: rgba(78,200,80,0.1);
+  border: 1px solid rgba(78,200,80,0.3);
+  border-radius: 12px;
+  padding: 16px 20px;
+  width: 100%;
+  max-width: 560px;
+  text-align: left;
+}
+
+.daily-played-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.daily-played-sub {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin-top: 4px;
+}

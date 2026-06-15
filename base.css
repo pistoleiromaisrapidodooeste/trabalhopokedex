@@ -1,0 +1,342 @@
+/* ============================================================
+   base.css — Estilos compartilhados por todas as páginas
+   Metodologia BEM + Variáveis CSS
+   ============================================================ */
+
+/* ── Variáveis ─────────────────────────────────────────────── */
+:root {
+  /* Cores principais */
+  --color-bg:          #0f0f1a;
+  --color-surface:     #1a1a2e;
+  --color-surface-2:   #16213e;
+  --color-border:      rgba(255,255,255,0.08);
+  --color-primary:     #e63946;
+  --color-primary-dark:#b5222e;
+  --color-accent:      #f4d03f;
+  --color-text:        #f0f0f5;
+  --color-text-muted:  #8888aa;
+  --color-white:       #ffffff;
+
+  /* Tipos de Pokémon */
+  --type-normal:    #9a9a7a;
+  --type-fire:      #f08030;
+  --type-water:     #6890f0;
+  --type-electric:  #f8d030;
+  --type-grass:     #78c850;
+  --type-ice:       #98d8d8;
+  --type-fighting:  #c03028;
+  --type-poison:    #a040a0;
+  --type-ground:    #e0c068;
+  --type-flying:    #a890f0;
+  --type-psychic:   #f85888;
+  --type-bug:       #a8b820;
+  --type-rock:      #b8a038;
+  --type-ghost:     #705898;
+  --type-dragon:    #7038f8;
+  --type-dark:      #705848;
+  --type-steel:     #b8b8d0;
+  --type-fairy:     #f0b6bc;
+
+  /* Tipografia */
+  --font-display:  'Bangers', cursive;
+  --font-body:     'Nunito', sans-serif;
+  --font-size-xs:  0.75rem;
+  --font-size-sm:  0.875rem;
+  --font-size-md:  1rem;
+  --font-size-lg:  1.25rem;
+  --font-size-xl:  1.75rem;
+  --font-size-2xl: 2.5rem;
+  --font-size-3xl: 4rem;
+
+  /* Espaçamento */
+  --space-xs:  0.25rem;
+  --space-sm:  0.5rem;
+  --space-md:  1rem;
+  --space-lg:  1.5rem;
+  --space-xl:  2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+
+  /* Bordas e sombras */
+  --radius-sm:   6px;
+  --radius-md:   12px;
+  --radius-lg:   20px;
+  --radius-xl:   32px;
+  --radius-full: 9999px;
+  --shadow-card: 0 4px 24px rgba(0,0,0,0.4);
+  --shadow-glow: 0 0 30px rgba(230,57,70,0.3);
+
+  /* Transições */
+  --transition-fast:   0.15s ease;
+  --transition-normal: 0.25s ease;
+  --transition-slow:   0.4s ease;
+}
+
+/* ── Reset ──────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+img    { display: block; max-width: 100%; }
+ul     { list-style: none; }
+a      { color: inherit; }
+button { cursor: pointer; font-family: inherit; }
+
+/* ── Utilitários ────────────────────────────────────────────── */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+[hidden] { display: none !important; }
+
+/* ── Animações compartilhadas ───────────────────────────────── */
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+@keyframes spin      { to { transform: rotate(360deg); } }
+@keyframes fade-in   { from { opacity: 0; } to { opacity: 1; } }
+@keyframes card-in   { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes float     { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes panel-in  { from { opacity: 0; transform: scale(0.85) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+@keyframes shake     { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+
+/* ── HEADER ─────────────────────────────────────────────────── */
+.header {
+  position: relative;
+  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 60%, #ff6b6b 100%);
+  padding: var(--space-xl) var(--space-xl) var(--space-2xl);
+  overflow: hidden;
+  text-align: center;
+}
+
+.header__inner {
+  position: relative;
+  z-index: 2;
+}
+
+.header__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-sm);
+}
+
+.header__logo-icon {
+  font-size: 2.5rem;
+  color: var(--color-white);
+  animation: spin-slow 8s linear infinite;
+  display: block;
+}
+
+.header__title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-3xl);
+  letter-spacing: 0.06em;
+  color: var(--color-white);
+  text-shadow: 4px 4px 0 rgba(0,0,0,0.25);
+  line-height: 1;
+}
+
+.header__subtitle {
+  font-size: var(--font-size-lg);
+  color: rgba(255,255,255,0.85);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* Decorative Poké Ball */
+.header__decoration {
+  position: absolute;
+  top: -40px; right: -60px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.header__ball {
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  border: 16px solid rgba(255,255,255,0.15);
+  position: relative;
+  opacity: 0.5;
+}
+
+.header__ball::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: -16px; right: -16px;
+  height: 16px;
+  background: rgba(255,255,255,0.2);
+  transform: translateY(-50%);
+}
+
+.header__ball::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 60px; height: 60px;
+  background: rgba(255,255,255,0.3);
+  border: 16px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  transform: translate(-50%,-50%);
+}
+
+/* ── HEADER NAV ─────────────────────────────────────────────── */
+.header__nav {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+a.header__nav-btn,
+.header__nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.12);
+  border: 2px solid rgba(255,255,255,0.25);
+  border-radius: 999px;
+  color: rgba(255,255,255,0.8);
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  letter-spacing: 0.06em;
+  padding: 8px 24px;
+  min-height: 48px;
+  min-width: 120px;
+  text-decoration: none;
+  transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+a.header__nav-btn:hover,
+.header__nav-btn:hover {
+  background: rgba(255,255,255,0.22);
+  border-color: rgba(255,255,255,0.5);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+a.header__nav-btn--active,
+.header__nav-btn--active {
+  background: rgba(255,255,255,0.95);
+  border-color: #fff;
+  color: var(--color-primary-dark);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+/* ── TYPE BADGE ─────────────────────────────────────────────── */
+.type-badge {
+  font-size: var(--font-size-xs);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px var(--space-sm);
+  border-radius: var(--radius-full);
+  color: var(--color-white);
+  background: var(--type-color, #777);
+  white-space: nowrap;
+}
+
+/* ── TYPE COLORS MAP ─────────────────────────────────────────── */
+.type--normal   { --type-color: var(--type-normal); }
+.type--fire     { --type-color: var(--type-fire); }
+.type--water    { --type-color: var(--type-water); }
+.type--electric { --type-color: var(--type-electric); color: #333 !important; }
+.type--grass    { --type-color: var(--type-grass); }
+.type--ice      { --type-color: var(--type-ice); color: #333 !important; }
+.type--fighting { --type-color: var(--type-fighting); }
+.type--poison   { --type-color: var(--type-poison); }
+.type--ground   { --type-color: var(--type-ground); color: #333 !important; }
+.type--flying   { --type-color: var(--type-flying); }
+.type--psychic  { --type-color: var(--type-psychic); }
+.type--bug      { --type-color: var(--type-bug); }
+.type--rock     { --type-color: var(--type-rock); }
+.type--ghost    { --type-color: var(--type-ghost); }
+.type--dragon   { --type-color: var(--type-dragon); }
+.type--dark     { --type-color: var(--type-dark); }
+.type--steel    { --type-color: var(--type-steel); color: #333 !important; }
+.type--fairy    { --type-color: var(--type-fairy); color: #333 !important; }
+
+/* ── MODAL (botão fechar — compartilhado entre páginas) ──────── */
+.modal__close {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  z-index: 10;
+  width: 36px; height: 36px;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  color: var(--color-text);
+  font-size: var(--font-size-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.modal__close:hover {
+  background: var(--color-primary);
+  transform: rotate(90deg);
+}
+
+/* ── FOOTER ─────────────────────────────────────────────────── */
+.footer {
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  padding: var(--space-lg) var(--space-xl);
+  text-align: center;
+  margin-top: auto;
+}
+
+.footer__text {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.footer__link {
+  color: var(--color-accent);
+  text-decoration: none;
+  font-weight: 700;
+  transition: color var(--transition-fast);
+}
+
+.footer__link:hover { color: var(--color-white); }
+
+/* ── RESPONSIVO base ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+  :root { --font-size-3xl: 2.8rem; }
+
+  .header {
+    padding: var(--space-xl) var(--space-md) var(--space-2xl);
+  }
+
+  .header__decoration { display: none; }
+}
+
+@media (max-width: 480px) {
+  a.header__nav-btn,
+  .header__nav-btn { min-width: 100px; padding: 8px 16px; font-size: 1.1rem; }
+}

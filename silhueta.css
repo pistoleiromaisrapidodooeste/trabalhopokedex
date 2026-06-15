@@ -1,0 +1,95 @@
+/* ============================================================
+   silhueta.css — Estilos exclusivos de silhueta.html
+   Depende de: base.css + pokédle.css
+   ============================================================ */
+
+/* ── SILHUETA STAGE ──────────────────────────────────────────── */
+.sil-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.sil-image-wrap {
+  position: relative;
+  width: 220px; height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.sil-image-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  border: 2px solid rgba(230,57,70,0.2);
+  animation: sil-pulse 2.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes sil-pulse {
+  0%,100% { transform: scale(1);    opacity: 0.5; }
+  50%      { transform: scale(1.07); opacity: 1;   }
+}
+
+.sil-image {
+  width: 200px; height: 200px;
+  object-fit: contain;
+  filter: brightness(0);
+  transition: filter 0.8s ease;
+  display: block;
+}
+
+/* ── HINT BAR ────────────────────────────────────────────────── */
+.sil-hint-bar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: 34px;
+}
+
+.sil-hint {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 4px 16px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  animation: card-in 0.4s ease both;
+}
+
+/* ── ATTEMPT DOTS ────────────────────────────────────────────── */
+.sil-attempts {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.sil-dot {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--color-border);
+  border: 2px solid rgba(255,255,255,0.08);
+  transition: background 0.25s, transform 0.15s;
+}
+
+.sil-dot--used  { background: var(--color-primary); border-color: var(--color-primary); transform: scale(1.2); }
+.sil-dot--wrong { background: #444; border-color: #555; }
+
+/* ── RESPONSIVO silhueta ─────────────────────────────────────── */
+@media (max-width: 480px) {
+  .sil-image-wrap { width: 180px; height: 180px; }
+  .sil-image      { width: 160px; height: 160px; }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .sil-image-wrap { width: 140px; height: 140px; }
+  .sil-image      { width: 120px; height: 120px; }
+}
